@@ -44,10 +44,12 @@ var app = {
 
 		pushPlugin = PushNotification.init({
 			android: {
-				senderID: "570571190177",
 				sound: true,
                 forceShow: true,
                 vibrate: true
+			},
+			browser: {
+				pushServiceURL: 'http://push.api.phonegap.com/v1/push'
 			},
 			ios: {
 				alert: true,
