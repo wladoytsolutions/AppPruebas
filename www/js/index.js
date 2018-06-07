@@ -26,22 +26,6 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-		BD_APP = window.sqlitePlugin.openDatabase({name: "ingetrace.db", location: 'default', createFromLocation: 1});
-		BD_APP.transaction(function(tx) {
-			tx.executeSql('CREATE TABLE IF NOT EXISTS tbl_datos (id_cliente VARCHAR (15),id_sucursal VARCHAR (4),json_sucursal TEXT,id_device TEXT)');
-			tx.executeSql("select count(json_sucursal) as cnt from tbl_datos;", [], function(tx, res) {
-			  if(res.rows.item(0).cnt=="0")
-			  {
-				  tx.executeSql("INSERT INTO tbl_datos (id_cliente,id_sucursal,json_sucursal,id_device) VALUES ('Nada','Nada','Nada','Nada');");
-			  }
-			});
-		});
-		app.receivedEvent('deviceready');
-
-		DEVICEPLATFORM = ""+device.platform;
-
-		DEVICEPLATFORM = DEVICEPLATFORM.toLowerCase();
-
 		pushPlugin = PushNotification.init({
 			android: {
 				sound: true,
@@ -63,104 +47,11 @@ var app = {
 			$("#H_TEXT_DEVICE").html(data.registrationId);
 			
 			var ID_device=''+data.registrationId;
-			
-			//Validando el Id device
-			BD_APP = window.sqlitePlugin.openDatabase({name: "ingetrace.db", location: 'default'});
-			BD_APP.transaction(function(tx) {
-				tx.executeSql('SELECT id_device FROM tbl_datos', [], function(tx, rs) {
-					var id_device_bd=""+rs.rows.item(0).id_device;
-					
-					if(id_device_bd!="Nada")
-					{
-						//Se actualizara el device ID y fecha para el dispositivo y tenerlo como activo
-						//Si el id device cambio, se debe notificar el cambio al servidor
-						$.ajax({
-								url	: RUTACONTROL,
-								type: 'POST',
-								data: 
-								{
-									accion		: 'UpdateIdDevice',
-									NewId_device: ID_device,
-									OldId_device: id_device_bd,
-									CK			: getCK()
-								},
-							  	async: false
-							}). done(function(response) {
-								if(id_device_bd!=ID_device)
-								{
-									setIdDevice(ID_device);
-								}
-								
-								setTimeout(function () {
-									if($('#H_DESDE_NOTIFICACION').val()!='1')
-									{
-										BuscarCookie();
-									}
-								}, 500);
-							});
-					}
-					else
-					{
-						setTimeout(function () {
-							if($('#H_DESDE_NOTIFICACION').val()!='1')
-							{
-								BuscarCookie();
-							}
-						}, 500);
-					}
-				}, function(tx, error) {
-				});
-			});
+			alert(ID_device);
 		});
 
 		pushPlugin.on('notification', function(data) {
-			$('#H_DESDE_NOTIFICACION').val('1');
-
-			var ID_CLIENTE;
-			var NOMBRE_CLIENTE;
-			var ID_SUCURSAL;
-			var NOMBRE_SUCURSAL;
-			var ID_SECCION;
-			var NOMBRE_SECCION;
-			var ID_EQUIPO;
-			var NOMBRE_EQUIPO;
-			var ID_SENSOR;
-			var TIPO_MODELO;
-
-			TITULO_NOTIFICACION=''+data.title;
-			MENSAJE_NOTIFICACION=''+data.message;
-
-			ID_CLIENTE=data.additionalData.info.id_cliente;
-			NOMBRE_CLIENTE=data.additionalData.info.nombre_cliente;
-			ID_SUCURSAL=data.additionalData.info.id_sucursal;
-			NOMBRE_SUCURSAL=data.additionalData.info.nombre_sucursal;
-			ID_SECCION=data.additionalData.info.id_seccion;
-			NOMBRE_SECCION=data.additionalData.info.nombre_seccion;
-			ID_EQUIPO=data.additionalData.info.id_equipo;
-			NOMBRE_EQUIPO=data.additionalData.info.nombre_equipo;
-			ID_SENSOR=data.additionalData.info.id_sensor;
-			TIPO_MODELO=data.additionalData.info.tipo_modelo;
-
-			pushPlugin.finish();
-			setTimeout(function () {
-				if(TIPO_MODELO!='M')
-				{
-					CargarNotificacion(ID_CLIENTE,NOMBRE_CLIENTE,ID_SUCURSAL,NOMBRE_SUCURSAL,ID_SECCION,NOMBRE_SECCION,ID_EQUIPO,NOMBRE_EQUIPO,ID_SENSOR,TIPO_MODELO);
-				}
-				else
-				{
-					MOSTRAR_MENSAJE_NOTIFICACION=true;
-					if($('#H_SUCURSAL_CARGADA').val()!="1")
-					{
-						BuscarCookie();
-					}
-					else
-					{
-						MOSTRAR_MENSAJE_NOTIFICACION=false;
-						MensajeAlerta(TITULO_NOTIFICACION,MENSAJE_NOTIFICACION);
-					}
-				}
-			}, 250);
+			
 		});
 		pushPlugin.on('error', function(e) {
 			// e.message
