@@ -35,8 +35,7 @@
   <platform name="android"> 
   	<resource-file src="google-services.json" target="google-services.json" /> 
   </platform> 
-  <plugin name="phonegap-plugin-push" spec="2.2.3"/>
-  <plugin name="cordova-plugin-sqlite-2" spec="1.0.5"/>
+  <plugin name="phonegap-plugin-push" spec="2.2.0"/>
   <plugin name="cordova-plugin-dialogs" spec="2.0.1"/>
   <platform name="android">
   	<icon density="ldpi" src="res/icon/android/icon-36-ldpi.png" />
