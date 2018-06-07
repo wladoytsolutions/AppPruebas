@@ -26,42 +26,40 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-		alert('onDeviceReady');
-		pushPlugin = PushNotification.init({
-			android: {
-				sound: true,
-                forceShow: true,
-                vibrate: true
-			},
-			browser: {
-				pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-			},
-			ios: {
-				alert: true,
-				badge: true,
-				sound: true
-			},
-			windows: {}
-		});
-
-		pushPlugin.on('registration', function(data) {
-			$("#H_TEXT_DEVICE").html(data.registrationId);
-			
-			var ID_device=''+data.registrationId;
-			alert(ID_device);
-		});
-
-		pushPlugin.on('notification', function(data) {
-			
-		});
-		pushPlugin.on('error', function(e) {
-			// e.message
-			alert("Verifique el estado de la red para poder recibir notificaciones, luego reinicie la aplicación");
-		});
+        alert('Received Device Ready Event');
+        app.setupPush();
     },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-		
+    setupPush: function() {
+        alert('calling push init');
+        var push = PushNotification.init({
+            "android": {
+            },
+            "browser": {},
+            "ios": {
+                "sound": true,
+                "vibration": true,
+                "badge": true
+            },
+            "windows": {}
+        });
+
+        push.on('registration', function(data) {
+            alert('registration event: ' + data.registrationId);
+        });
+
+        push.on('error', function(e) {
+            alert("push error = " + e.message);
+        });
+
+        push.on('notification', function(data) {
+            alert('notification event');
+            navigator.notification.alert(
+                data.message,         // message
+                null,                 // callback
+                data.title,           // title
+                'Ok'                  // buttonName
+            );
+       });
     }
 };
 function MensajeAlerta(Titulo,Mensaje)
