@@ -34,7 +34,9 @@ var app = {
         var push = PushNotification.init({
             "android": {
             },
-            "browser": {},
+            browser: {
+				pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+			},
             "ios": {
                 "sound": true,
                 "vibration": true,
