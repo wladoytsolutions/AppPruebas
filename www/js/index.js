@@ -41,14 +41,16 @@ var app = {
     setupPush: function() {
         alert('calling push init');
         var push = PushNotification.init({
-            "android": {},
-            "browser": {},
-            "ios": {
-                "sound": true,
-                "vibration": true,
-                "badge": true
+            android: {},
+            browser: {
+				pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+			},
+            ios: {
+                sound: true,
+                vibration: true,
+                badge: true
             },
-            "windows": {}
+            windows: {}
         });
         alert('after init');
 
