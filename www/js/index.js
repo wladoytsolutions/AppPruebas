@@ -36,10 +36,6 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        alert('Received Device Ready Event');
-		FCMPlugin.getToken(function(token){
-			alert(token);
-		});
         app.setupPush();
     },
     setupPush: function() {
