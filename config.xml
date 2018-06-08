@@ -25,9 +25,7 @@
         <allow-intent href="itms-apps:*" />
         <resource-file src="GoogleService-Info.plist" />
     </platform>
-    <plugin name="phonegap-plugin-push" spec="2.2.0">
-        <variable name="FCM_VERSION" value="11.0.1" />
-    </plugin>
+    <plugin name="phonegap-plugin-push" spec="2.2.0"/>
     <engine name="android" spec="~7.0.0" />
     <engine name="ios" spec="~4.5.4" />
 </widget>
