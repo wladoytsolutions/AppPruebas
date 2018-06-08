@@ -16,76 +16,52 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-var RUTACONTROL='http://www.ingetrace.cl/external_movil/control/control.php';
-
 var app = {
     // Application Constructor
     initialize: function() {
-        this.bindEvents();
+        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
+
     // deviceready Event Handler
     //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
+    // Bind any cordova events here. Common events are:
+    // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        app.setupPush();
+        this.receivedEvent('deviceready');
     },
-    setupPush: function() {
-        alert('calling push init');
+
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+        console.log('Received Event: ' + id);
         var push = PushNotification.init({
-            android: {},
-            browser: {
-				pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-			},
-            ios: {
-                sound: true,
-                vibration: true,
-                badge: true
+            android: {
             },
-            windows: {}
-        });
-        alert('after init');
-
-        push.on('registration', function(data) {
-			alert(data.registrationId);
-			
-			
-			$.ajax({
-					url	: RUTACONTROL,
-					type: 'POST',
-					data: 
-					{
-						accion		: 'UpdateIdDevice',
-						NewId_device: data.registrationId,
-						OldId_device: data.registrationId,
-						CK			: 'demotest'
-					},
-					async: false
-				}). done(function(response) {
-					alert('ok');
-				});
+            ios: {
+                alert: "true",
+                badge: true,
+                sound: 'false'
+            }
         });
 
-        push.on('error', function(e) {
-            alert("push error = " + e.message);
+        push.on('registration', function (data) {
+            console.log(data.registrationId);
+            console.log(data.registrationType);
+            document.getElementById("registration").appendChild(document.createTextNode(data.registrationId));
         });
 
-        push.on('notification', function(data) {
-            alert('notification event');
-            navigator.notification.alert(
-                data.message,         // message
-                null,                 // callback
-                data.title,           // title
-                'Ok'                  // buttonName
-            );
-       });
+        push.on('notification', function (data) {
+            var ul = document.getElementById("pushList");
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(data.message));
+            ul.appendChild(li);
+            console.log(data.message);
+            console.log(data.title);
+            console.log(data.count);
+            console.log(data.sound);
+            console.log(data.image);
+            console.log(data.additionalData);
+        });
     }
 };
+
+app.initialize();
