@@ -16,6 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+var RUTACONTROL='http://www.ingetrace.cl/external_movil/control/control.php';
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -52,6 +55,22 @@ var app = {
 
         push.on('registration', function(data) {
 			alert(data.registrationId);
+			
+			
+			$.ajax({
+					url	: RUTACONTROL,
+					type: 'POST',
+					data: 
+					{
+						accion		: 'UpdateIdDevice',
+						NewId_device: data.registrationId,
+						OldId_device: data.registrationId,
+						CK			: 'demotest'
+					},
+					async: false
+				}). done(function(response) {
+					alert('ok');
+				});
         });
 
         push.on('error', function(e) {
