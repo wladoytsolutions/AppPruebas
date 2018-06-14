@@ -18,6 +18,7 @@
  */
 
 var RUTACONTROL='http://www.ingetrace.cl/external_movil/control/control.php';
+var pushPlugin;
 
 var app = {
     // Application Constructor
@@ -37,6 +38,38 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+		
+		pushPlugin = PushNotification.init({
+			android: {
+			},
+			browser: {
+				pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+			},
+			ios: {
+				alert: "true",
+				badge: "true",
+				sound: "true"
+			},
+			windows: {}
+		});
+
+		push.on('registration', (data) => {
+			// data.registrationId
+			alert(data.registrationId);
+		});
+
+		push.on('notification', (data) => {
+			// data.message,
+			// data.title,
+			// data.count,
+			// data.sound,
+			// data.image,
+			// data.additionalData
+		});
+
+		push.on('error', (e) => {
+			// e.message
+		});
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
