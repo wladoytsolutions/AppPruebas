@@ -69,6 +69,7 @@ var app = {
 
 		push.on('error', (e) => {
 			// e.message
+			alert(e.message);
 		});
     },
     // Update DOM on a Received Event
