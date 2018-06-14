@@ -8,7 +8,7 @@
   <content src="index.html"/>
   
   <preference name="phonegap-version" value="cli-7.1.0" />
-  <preference name='pgb-builder-version' value='2' />
+  <preference name='pgb-builder-version' value='1' />
   <preference name="orientation" value="default"/>
   <preference name="target-device" value="universal"/>
   <preference name="Fullscreen" value="true"/>
@@ -40,6 +40,7 @@
   <icon src="www/res/icon/windows-phone/icon-173-tile.png" gap:platform="winphone" gap:role="background"/>
   <access origin="*"/>
   <!-- <plugin name="cordova-plugin-crosswalk-webview-pgb-adapt" source="npm" version="1.4.0-dev-11"/> -->
+  <plugin name="cordova-plugin-fcm-config" spec="cordova-plugin-fcm-config" />
   <platform name="android">
   	<resource-file src="www/google-services.json" target="google-services.json" />
   </platform>
