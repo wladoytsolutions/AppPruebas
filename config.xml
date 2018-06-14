@@ -40,7 +40,7 @@
   <icon src="www/res/icon/windows-phone/icon-173-tile.png" gap:platform="winphone" gap:role="background"/>
   <access origin="*"/>
   <!-- <plugin name="cordova-plugin-crosswalk-webview-pgb-adapt" source="npm" version="1.4.0-dev-11"/> -->
-  <plugin name="cordova-plugin-fcm-config" spec="cordova-plugin-fcm-config" />
+  <plugin name="cordova-plugin-fcm-config" spec="1.0.0" />
   <platform name="android">
   	<resource-file src="www/google-services.json" target="google-services.json" />
   </platform>
