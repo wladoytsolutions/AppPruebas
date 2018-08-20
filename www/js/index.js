@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -37,6 +38,18 @@ var app = {
 		app.pushNotification();
 		FCMPlugin.getToken(function(token){
 			alert(token);
+			$.ajax({
+				url	:'http://35.163.42.97:8080/prueba/grabar_id_device.php',
+				type:'POST',
+				data:{
+					Id_usuario	: 'demo',
+					Plataforma	: 'android',
+					Id_device	: token
+				},
+				async: false
+			}). done(function(response) {
+				alert(response);
+			});
 		});
     },
     // Update DOM on a Received Event
@@ -60,3 +73,5 @@ var app = {
       });
     }
 };
+
+app.initialize();
