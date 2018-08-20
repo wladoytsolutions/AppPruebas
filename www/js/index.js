@@ -34,6 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+		app.pushNotification();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -45,5 +46,14 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+	pushNotification: function(){
+      FCMPlugin.onNotification(function(data){
+        if(data.wasTapped){
+          alert(JSON.stringify(data));
+        }else{
+          alert(JSON.stringify(data));
+        }
+      });
     }
 };
