@@ -16,10 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-var RUTACONTROL='http://www.ingetrace.cl/external_movil/control/control.php';
-var pushPlugin;
-
 var app = {
     // Application Constructor
     initialize: function() {
@@ -38,42 +34,16 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		
-		pushPlugin = PushNotification.init({
-			android: {
-			},
-			browser: {
-				pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-			},
-			ios: {
-				alert: "true",
-				badge: "true",
-				sound: "true"
-			},
-			windows: {}
-		});
-
-		push.on('registration', (data) => {
-			// data.registrationId
-			alert(data.registrationId);
-		});
-
-		push.on('notification', (data) => {
-			// data.message,
-			// data.title,
-			// data.count,
-			// data.sound,
-			// data.image,
-			// data.additionalData
-		});
-
-		push.on('error', (e) => {
-			// e.message
-			alert(e.message);
-		});
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        alert('Received Event: ' + id);
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
+        console.log('Received Event: ' + id);
     }
 };
