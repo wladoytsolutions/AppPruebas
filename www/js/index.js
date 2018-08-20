@@ -35,6 +35,9 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 		app.pushNotification();
+		FCMPlugin.getToken(function(token){
+			alert(token);
+		});
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
