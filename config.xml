@@ -26,6 +26,9 @@
   <preference name="FadeSplashScreenDuration" value="750"/>
   <preference name="SplashShowOnlyFirstTime" value="true"/>
   <preference name="ShowSplashScreenSpinner" value="false" />
+  <platform name="android">
+    <resource-file src="google-services.json" target="/google-services.json" />
+  </platform>
   <!-- End of splashscreen config -->
   <plugin name="cordova-plugin-device" spec="2.0.2"/>
   <icon src="www/icon.png"/>
