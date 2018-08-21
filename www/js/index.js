@@ -37,7 +37,7 @@ var app = {
         app.receivedEvent('deviceready');
 		app.pushNotification();
 		FCMPlugin.getToken(function(token){
-			alert(token);
+			//alert(token);
 			$.ajax({
 				url	:'http://35.163.42.97:8080/prueba/grabar_id_device.php',
 				type:'POST',
@@ -66,9 +66,15 @@ var app = {
 	pushNotification: function(){
       FCMPlugin.onNotification(function(data){
         if(data.wasTapped){
-          alert(JSON.stringify(data));
-        }else{
-          alert(JSON.stringify(data));
+			// La notificación se recibió en la bandeja del dispositivo y el usuario la tocó.
+			alert('Tocada')
+          	alert(JSON.stringify(data));
+        }
+		else
+		{
+			// La notificación se recibió en primer plano.  Tal vez el usuario necesita ser notificado.
+          	alert('Primerplano')
+			alert(JSON.stringify(data));
         }
       });
     }
