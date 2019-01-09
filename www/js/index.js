@@ -44,7 +44,7 @@ var app = {
 app.initialize();
 
 function camSuccess(imgData){
-	$("#img_Campurada").attr("src",imgData);
+	$("#img_Campurada").attr("src","data:image/jpeg;base64,"+imgData);
 	alert(imgData);
 	//<img src="file://wherehpone/img"
 }
