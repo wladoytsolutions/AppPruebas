@@ -44,7 +44,7 @@ var app = {
 app.initialize();
 
 function camSuccess(imgData){
-	$("#img_Campurada").attr("src","data:image/jpeg;base64," + imgData);
+	$("#img_Campurada").attr("src",imgData);
 	alert(imgData);
 	//<img src="file://wherehpone/img"
 }
@@ -56,7 +56,7 @@ function camError(error){
 function accessCamera(){
 	var options = {
         quality: 50,
-        destinationType: Camera.DestinationType.DATA_URL,
+        destinationType: Camera.DestinationType.FILE_URI,
         // In this app, dynamically set the picture source, Camera or photo gallery
         sourceType: Camera.PictureSourceType.CAMERA,
         encodingType: Camera.EncodingType.JPEG,
