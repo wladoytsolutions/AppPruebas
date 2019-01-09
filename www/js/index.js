@@ -35,7 +35,6 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		app.pushNotification();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -47,39 +46,6 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    },
-	pushNotification: function(){
-		FCMPlugin.getToken(function(token){
-			//alert(token);
-			$.ajax({
-				url	:'http://35.163.42.97:8080/prueba/grabar_id_device.php',
-				type:'POST',
-				data:{
-					Id_usuario	: 'demo',
-					Plataforma	: 'android',
-					Id_device	: token
-				},
-				async: false
-			}). done(function(response) {
-				alert(response);
-			});
-		});
-		FCMPlugin.onNotification(function(data){
-			if(data.wasTapped)
-			{
-				// La notificación se recibió en la bandeja del dispositivo y el usuario la tocó.
-				alert('Tocada')
-				alert(JSON.stringify(data));
-				alert(data.param1);
-			}
-			else
-			{
-				// La notificación se recibió en primer plano.  Tal vez el usuario necesita ser notificado.
-				alert('Primerplano')
-				alert(JSON.stringify(data));
-				alert(data.param1);
-			}
-		});
     }
 };
 
