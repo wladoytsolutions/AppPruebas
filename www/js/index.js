@@ -35,6 +35,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+		navigator.splashscreen.hide();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -46,7 +47,7 @@ app.initialize();
 $(function(){
 	function camSuccess(imgData){
 		$("#img_Campurada").attr("src",imgData);
-		
+		alert(imgData);
 		//<img src="file://wherehpone/img"
 	}
 	
