@@ -58,7 +58,7 @@ $(function(){
 	function accessCamera(){
 		var options = {
 			destinationType: Camera.DestinationType.FILE_URI,
-			sourceType: Camera.PictureSourceType.CAMERA //Photogallery
+			sourceType: Camera.PictureSourceType.PHOTOLIBRARY
 		}
 		navigator.camera.getPicture(camSuccess,camError,options);
 	}
