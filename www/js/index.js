@@ -35,7 +35,6 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		navigator.splashscreen.hide();
-		$("#btn_camara").on("click",accessCamera);
     }
 };
 
@@ -53,8 +52,13 @@ function camError(error){
 
 function accessCamera(){
 	var options = {
-		destinationType: Camera.DestinationType.FILE_URI,
+		destinationType: Camera.DestinationType.DATA_URL,
 		sourceType: Camera.PictureSourceType.CAMERA
 	}
 	navigator.camera.getPicture(camSuccess,camError,options);
+}
+function TomarFoto(e)
+{
+	e.preventDefault();
+	accessCamera();
 }
