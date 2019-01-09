@@ -35,7 +35,10 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		navigator.splashscreen.hide();
-    }
+    },
+	receivedEvent: function(id) {
+		
+    },
 };
 
 app.initialize();
