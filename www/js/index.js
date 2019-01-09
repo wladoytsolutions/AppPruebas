@@ -14,8 +14,9 @@ $(function(){
 	
 	function accessCamera(){
 		var options = {
-			destinationType	  : Camera.DestinationType.FILE_URI,
+			destinationType	  : Camera.DestinationType.DATA_URL,
 			sourceType		  : Camera.PictureSourceType.CAMERA,
+			quality			  : 100,
 			correctOrientation: true
 		}
 		navigator.camera.getPicture(camSuccess,camError,options);
