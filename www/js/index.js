@@ -35,6 +35,21 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		navigator.splashscreen.hide();
+		$("#btnTest").click(function(e){
+			e.preventDefault();
+
+			//var Ruta MAC http://localhost:8080/AplicacionReconocimiento/ControlJSP.jsp
+
+			$.post('http://35.163.42.97:8080/web/ControlJSP.jsp',{
+				Base64    : $('#Base64').html(),
+				Extension : 'jpeg'
+			},
+			function(response) {
+				alert(response);
+			}).done(function(response) {
+				//alert(response);
+			});
+		});
     },
 	receivedEvent: function(id) {
 		
@@ -75,20 +90,3 @@ function TomarFoto(e)
 	e.preventDefault();
 	accessCamera();
 }
-$( document ).ready(function() {
-	$("#btnTest").click(function(e){
-		e.preventDefault();
-			
-		//var Ruta MAC http://localhost:8080/AplicacionReconocimiento/ControlJSP.jsp
-			
-		$.post('http://35.163.42.97:8080/web/ControlJSP.jsp',{
-			Base64    : $('#Base64').html(),
-			Extension : 'jpeg'
-		},
-		function(response) {
-			alert(response);
-		}).done(function(response) {
-			//alert(response);
-		});
-	});
-});
