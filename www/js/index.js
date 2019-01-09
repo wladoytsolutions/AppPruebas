@@ -55,9 +55,14 @@ function camError(error){
 
 function accessCamera(){
 	var options = {
-		destinationType	: Camera.DestinationType.DATA_URL,
-		sourceType		: Camera.PictureSourceType.CAMERA,
-		encodingType	: Camera.EncodingType.JPEG
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL,
+        // In this app, dynamically set the picture source, Camera or photo gallery
+        sourceType: srcType,
+        encodingType: Camera.EncodingType.JPEG,
+        mediaType: Camera.MediaType.PICTURE,
+        allowEdit: true,
+        correctOrientation: true  //Corrects Android orientation quirks
 	}
 	navigator.camera.getPicture(camSuccess,camError,options);
 }
