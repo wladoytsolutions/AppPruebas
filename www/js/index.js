@@ -42,10 +42,14 @@ var app = {
 };
 
 app.initialize();
-
+function ObtenerValorBase64DeDataURL(DataUrl)
+{
+	var res = DataUrl.split(',');
+    return res[1];
+}
 function camSuccess(imageData){
-	$("#img_Campurada").attr("src","data:image/jpeg;base64," + imageData);
-	alert(imageData);
+	$('#img_Campurada').attr('src','data:image/jpeg;base64,' + imageData);
+	$('#Base64').html(imageData);
 	//<img src="file://wherehpone/img"
 }
 
@@ -71,3 +75,20 @@ function TomarFoto(e)
 	e.preventDefault();
 	accessCamera();
 }
+$( document ).ready(function() {
+	$("#btnTest").click(function(e){
+		e.preventDefault();
+			
+		//var Ruta MAC http://localhost:8080/AplicacionReconocimiento/ControlJSP.jsp
+			
+		$.post('http://35.163.42.97:8080/web/ControlJSP.jsp',{
+			Base64    : $('#Base64').html(),
+			Extension : 'jpeg'
+		},
+		function(response) {
+			alert(response);
+		}).done(function(response) {
+			//alert(response);
+		});
+	});
+});
