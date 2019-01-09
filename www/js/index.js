@@ -64,7 +64,7 @@ function ObtenerValorBase64DeDataURL(DataUrl)
 }
 function camSuccess(imageData){
 	$('#img_Campurada').attr('src','data:image/jpeg;base64,' + imageData);
-	$('#Base64').html(imageData);
+	$('#Base64').html(''+imageData);
 	//<img src="file://wherehpone/img"
 }
 
