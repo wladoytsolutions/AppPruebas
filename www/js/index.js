@@ -34,35 +34,27 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
 		navigator.splashscreen.hide();
-		
-		$(function(){
-			function camSuccess(imgData){
-				$("#img_Campurada").attr("src",imgData);
-				alert(imgData);
-				//<img src="file://wherehpone/img"
-			}
-
-			function camError(error){
-				alert("Error: "+error);
-			}
-
-			function accessCamera(){
-				var options = {
-					destinationType: Camera.DestinationType.FILE_URI,
-					sourceType: Camera.PictureSourceType.CAMERA
-				}
-				navigator.camera.getPicture(camSuccess,camError,options);
-			}
-
-			$("#btn_camara").on("click",accessCamera);
-		});
-		
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
+		$("#btn_camara").on("click",accessCamera);
     }
 };
 
 app.initialize();
+
+function camSuccess(imgData){
+	$("#img_Campurada").attr("src",imgData);
+	alert(imgData);
+	//<img src="file://wherehpone/img"
+}
+
+function camError(error){
+	alert("Error: "+error);
+}
+
+function accessCamera(){
+	var options = {
+		destinationType: Camera.DestinationType.FILE_URI,
+		sourceType: Camera.PictureSourceType.CAMERA
+	}
+	navigator.camera.getPicture(camSuccess,camError,options);
+}
