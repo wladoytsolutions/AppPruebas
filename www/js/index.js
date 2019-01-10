@@ -73,7 +73,6 @@ function camSuccess(imageData){
 	function(response) {
 		SpinnerDialog.hide();
 	}).done(function(response) {
-		alert(response);
 		var json = jQuery.parseJSON(response);
 		var Producto="";
 		
