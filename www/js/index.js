@@ -73,11 +73,11 @@ function camSuccess(imageData){
 	function(response) {
 		SpinnerDialog.hide();
 	}).done(function(response) {
-		//alert(response);
+		alert(response);
 		var json = jQuery.parseJSON(response);
 		var Producto="";
-		
 		$.each(json, function(i, d) {
+			alert(d.Etiqueta);
 			switch (String(d.Etiqueta)) {
 			  case "mayoreal":
 				Producto = "Mayonesa Real Mayo";
