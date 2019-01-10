@@ -76,23 +76,20 @@ function camSuccess(imageData){
 		alert(response);
 		var json = jQuery.parseJSON(response);
 		var Producto="";
-		$.each(json, function(i, d) {
-			alert(d.Etiqueta);
-			switch (String(d.Etiqueta)) {
-			  case "mayoreal":
+		
+		switch (String(json['Etiqueta'])) {
+			case "mayoreal":
 				Producto = "Mayonesa Real Mayo";
 				break;
-			  case 1:
+			case 1:
 				Producto = "cervezaheineken";
 				break;
-			  default:
+			default:
 				Producto = "No se pudo reconocer o No existe en los registros del Sistema";
 				break;
-			}
+		}
 			
-			MensajeAlerta("Resultado", "Su producto es : "+Producto);
-			break;
-		});
+		MensajeAlerta("Resultado", "Su producto es : "+Producto);
 	});
 	
 	
