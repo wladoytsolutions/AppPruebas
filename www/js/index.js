@@ -42,6 +42,19 @@ var app = {
 };
 
 app.initialize();
+
+function MensajeAlerta(Titulo,Mensaje)
+{
+	navigator.notification.alert(
+		Mensaje,  // message
+		alertDismissed,         // callback
+		Titulo,            // title
+		'Aceptar'                  // buttonName
+	);
+}
+function alertDismissed() {
+    // do something
+}
 function ObtenerValorBase64DeDataURL(DataUrl)
 {
 	var res = DataUrl.split(',');
@@ -51,17 +64,35 @@ function camSuccess(imageData){
 	$('#img_Campurada').attr('src','data:image/jpeg;base64,' + imageData);
 	//$('#Base64').html(''+imageData);
 	//<img src="file://wherehpone/img"
-	SpinnerDialog.show(null, "message");
+	SpinnerDialog.show("Cargando...", "Buscando información");
 	
 	$.post('http://35.163.42.97:8080/web/ControlJSP.jsp',{
 		Base64    : imageData,
 		Extension : 'jpeg'
 	},
 	function(response) {
-		alert(response);
+		SpinnerDialog.hide();
 	}).done(function(response) {
 		//alert(response);
-		SpinnerDialog.hide();
+		var json = jQuery.parseJSON(response);
+		var Producto="";
+		
+		$.each(json, function(i, d) {
+			switch (String(d.Etiqueta)) {
+			  case "mayoreal":
+				Producto = "Mayonesa Real Mayo";
+				break;
+			  case 1:
+				Producto = "cervezaheineken";
+				break;
+			  default:
+				Producto = "No se pudo reconocer o No existe en los registros del Sistema";
+				break;
+			}
+			
+			MensajeAlerta("Resultado", "Su producto es : "+Producto);
+			break;
+		});
 	});
 	
 	
